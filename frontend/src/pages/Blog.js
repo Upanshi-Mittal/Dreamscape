@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { handleerror, handlesuccess } from "../utils";
 import { useNavigate } from "react-router-dom";
-import './Blog.css'
 function Blog() {
     const navigate = useNavigate();
     const [blogData, setBlogData] = useState({
-        date: "",
         title: "",
         content: ""
     });
@@ -21,9 +19,9 @@ function Blog() {
 
     const complete = async (e) => {
         e.preventDefault();
-        const { date, title, content } = blogData;
+        const {title, content } = blogData;
 
-        if (!title || !content || !date) {
+        if (!title || !content) {
             return handleerror("All Fields are required ⚠️");
         }
 
@@ -43,6 +41,7 @@ function Blog() {
 
             if (response.ok) {
                 handlesuccess("Blog Posted 🎉");
+                setBlogData({ title: "", content: "" });
                 setTimeout(() => navigate("/final"), 1000);
             } else {
                 handleerror(data?.message || "Failed to post blog 😓");
@@ -56,17 +55,6 @@ function Blog() {
     return (
         <div className="Blog">
             <form onSubmit={complete}>
-                <div className="date">
-                    <label htmlFor="date">📅 Date</label>
-                    <input
-                        id="date"
-                        type="date"
-                        name="date"
-                        value={blogData.date}
-                        onChange={handleInput}
-                        placeholder="20-10-2025"
-                    />
-                </div>
                 <div className="title">
                     <label htmlFor="title">📝 Title</label>
                     <input
@@ -86,7 +74,8 @@ function Blog() {
                         value={blogData.content}
                         onChange={handleInput}
                         placeholder="lorem ipsum dolor sit..."
-                        rows={6}
+                        rows={4}
+                        cols={50}
                     />
                 </div>
                 <button type="submit">✨ Submit</button>

@@ -1,5 +1,6 @@
 const express=require( 'express');
 const likes=require( './likes');
+const comments=require( './comments');
 const router = express.Router();
 const { blogmodel }=require( "../Models/user");
 const auth= require( '../Middlewares/auth');
@@ -8,4 +9,5 @@ const Blog=require( './bloggssss');
 router.post('/add', auth, Add);
 router.get('/blog', auth, Blog);
 router.post('/:id/like', auth, likes);
+router.post('/:id/comments', auth,comments);
 module.exports = router;

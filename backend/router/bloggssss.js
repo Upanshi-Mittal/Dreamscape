@@ -1,5 +1,6 @@
-const {blogmodel}=require("../Models/user")
-const express=require("express")
+const express = require('express');
+const router = express.Router();
+const { blogmodel } = require('../Models/user');
 const Blog=async(req,res)=>{
   try {
     const allBlogs =await blogmodel.find();

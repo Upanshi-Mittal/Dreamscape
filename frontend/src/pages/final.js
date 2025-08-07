@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { handlesuccess } from '../utils';
 import { ToastContainer } from 'react-toastify';
+import { FaHeart, FaComment, FaUser } from 'react-icons/fa';
 
 function Final() {
     const navigate = useNavigate();
@@ -36,7 +37,29 @@ function Final() {
             console.error("Error fetching blog data:", error);
         }
     };
-
+    const handleLike = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:8080/products/${id}/like`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: localStorage.getItem("token"),
+            },
+        });
+        const result = await response.json();
+        console.log("Liked blog:", result);
+        fetchBlogs(); // Refresh blogs to update like count
+    } catch (error) {
+        console.error("Error liking blog:", error);
+    }
+};
+ const handlecomments=async(id)=>{
+     try{
+         
+     }catch(err){
+         console.log(err);
+     }
+ }
     useEffect(() => {
         fetchBlogs();
     }, []);
@@ -62,7 +85,7 @@ function Final() {
     };
 
     const addButtonStyle = {
-        backgroundColor: '#ddffdd',
+        backgroundColor: '#4ea618ff',
         padding: '10px',
         borderRadius: '5px',
         margin: '10px 0',
@@ -91,6 +114,15 @@ function Final() {
                             <h2>{b.title}</h2>
                             <p>{new Date(b.date).toLocaleDateString()}</p>
                             <p>{b.content}</p>
+                            <p>Author: {b.name}</p>
+                            
+                            <span style={{ }}>
+                                <button onClick={() => handleLike(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+    <FaHeart style={{ color: 'red', marginRight: '5px' }} />
+</button> {b.likes}
+                            </span>
+                                <button onClick={()=>handlecomments(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaComment style={{ color: 'blue', marginRight: '5px' }} />{b.comments.length}</button>
+                            
                         </div>
                     ))
                 ) : (

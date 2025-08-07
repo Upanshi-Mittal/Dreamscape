@@ -17,7 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>⚙️ Auth App</h1>
 
       {/* Sets auth state on refresh if token exists */}
       <RefereshHandler setIsAuthenticated={setIsAuthenticated} />
