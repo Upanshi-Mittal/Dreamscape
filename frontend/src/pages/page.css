@@ -1,25 +1,17 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #8e735b, #d6bfa8);
-  color: #2e2e2e;
-  height:100vh;
-
 }
-
-.container {
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
+.header{
+  display:flex;
+  justify-content: space-between;
   align-items: center;
-}
+  background-color:  rgba(74, 74, 74, 0.95);
+  color:#fff;
+  padding-left: 10px;
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
 }
-
 .add-btn {
   background-color: #3d2e1e;
   color: #fff;
@@ -68,6 +60,16 @@ h1 {
   font-size: 1rem;
   line-height: 1.5;
 }
-h1, h2 {
-  font-family: 'Playfair Display', serif;
+
+
+.BlogList{
+  border-radius: 50%;
+}
+
+.additional{
+  display:flex;
+  margin-right: 20px;
+
+  color:#fff;
+  
 }

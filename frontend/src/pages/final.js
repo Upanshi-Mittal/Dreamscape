@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { handlesuccess } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import { FaHeart, FaComment, FaUser } from 'react-icons/fa';
-
+import './page.css';
 function Final() {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
@@ -47,8 +47,10 @@ function Final() {
             },
         });
         const result = await response.json();
+        
         console.log("Liked blog:", result);
         fetchBlogs(); // Refresh blogs to update like count
+
     } catch (error) {
         console.error("Error liking blog:", error);
     }
@@ -85,7 +87,7 @@ function Final() {
     };
 
     const addButtonStyle = {
-        backgroundColor: '#4ea618ff',
+        backgroundColor: 'rgba(157, 155, 155, 0.95)',
         padding: '10px',
         borderRadius: '5px',
         margin: '10px 0',
@@ -93,15 +95,19 @@ function Final() {
     };
 
     return (
-        <div>
-            
+        <div >
+            <div className="header">
             <h1>Welcome, {loggedInUser}</h1>
-
+            
             <div className="NewBlog">
-                <Link to="/Blog" style={addButtonStyle}>➕ Add New Blog</Link>
+                <Link to="/Blog" style={addButtonStyle}>➕</Link>
+                <button onClick={clearAll} style={logoutButtonStyle}>
+                Logout
+            </button>
             </div>
-
-          <div className="BlogList" style={{ display: "flex",
+            
+            </div>
+          <div style={{ display: "flex",
                 flexDirection: "column",      
                 alignItems: "center",         
                 justifyContent: "center",     
@@ -110,19 +116,21 @@ function Final() {
                 padding: "2rem"}}>
                 {Array.isArray(blogs) && blogs.length > 0 ? (
                     blogs.map((b) => (
-                        <div key={b._id} style={blogCardStyle}>
+                        <div className="overlay" key={b._id}  >
                             <h2>{b.title}</h2>
                             <p>{new Date(b.date).toLocaleDateString()}</p>
                             <p>{b.content}</p>
+
+
                             <p>Author: {b.name}</p>
+                            <div className="additional">
                             
-                            <span style={{ }}>
                                 <button onClick={() => handleLike(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-    <FaHeart style={{ color: 'red', marginRight: '5px' }} />
-</button> {b.likes}
-                            </span>
-                                <button onClick={()=>handlecomments(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaComment style={{ color: 'blue', marginRight: '5px' }} />{b.comments.length}</button>
+    <FaHeart style={{ color: 'crimsonred' }} />{b.likes}
+</button> 
                             
+                                <button onClick={()=>handlecomments(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaComment style={{ color: 'white'}} />{b.comments.length}</button>
+                            </div>
                         </div>
                     ))
                 ) : (
@@ -130,9 +138,7 @@ function Final() {
                 )}
             </div>
 
-            <button onClick={clearAll} style={logoutButtonStyle}>
-                🚪 Logout
-            </button>
+            
             <ToastContainer />
         </div>
     );

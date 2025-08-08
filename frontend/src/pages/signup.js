@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import "./page.css";
+import "./home.css";
 import { handleerror, handlesuccess } from "../utils";
 
 
@@ -62,8 +62,9 @@ function Signup({ setIsAuthenticated }) {
 
   return (
     <div className="container">
+      <div className="overlay" style={{width:"35%",height:"60%"}}>
       <form className="form" onSubmit={handleSubmit}>
-        <h2 className="page">✍️ Sign Up</h2>
+        <h2 className="page" style={{fontSize:"50px"}}>Sign Up</h2>
 
         <div className="details">
           <label htmlFor="name">Username</label>
@@ -102,13 +103,13 @@ function Signup({ setIsAuthenticated }) {
           />
         </div>
 
-        <button type="submit">🚀 Sign Up</button>
+        <button type="submit">Sign Up</button>
 
         <span style={{ marginTop: '10px' }}>
           Already have an account? <Link to="/login">Login</Link>
         </span>
       </form>
-
+      </div>
       <ToastContainer />
     </div>
   );

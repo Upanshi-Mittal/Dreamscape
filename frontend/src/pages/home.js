@@ -1,24 +1,25 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import { ToastContainer } from 'react-toastify'
-import './page.css'
+import './home.css'
 function Home() {
     return (
-        <div className="container" style={{height:"60vh"}}>
-            <h2>Home</h2>
+        <div className="container">
+            <div className="overlay" style={{width:"35%",height:"60%"}}>
+            <h2 style={{fontSize:"50px"}}>Home</h2>
             
                 <Link to="/signup">
-                    <button className="signup" style={{ color: "white" }}>
+                    <button className="signup">
                         SignUp
                     </button>
                 </Link>
             
                 <Link to="/login">
-                    <button className="login" style={{ color: "white" }}>
+                    <button className="login" style={{ fontSize:"20px" }}>
                         Login
                     </button>
                 </Link>
-            
+            </div>
             <ToastContainer/>
         </div>
     )
