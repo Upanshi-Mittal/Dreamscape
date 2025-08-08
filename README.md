@@ -39,10 +39,12 @@ It supports **user authentication**, **likes**, and **comments**, making it a sm
 1. **Clone the repository**
 ```bash
 git clone https://github.com/your-username/InkHive.git
-
+```
 2. **Navigate to the repo**
+```bash
 cd InkHive
-
+```
 3. **Install package**
+```bash
 npm install
-
+```
