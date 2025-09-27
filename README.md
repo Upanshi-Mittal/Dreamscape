@@ -53,8 +53,7 @@ cd frontend
 npm install
 ```
 5.**Open an another terminal**
-```
-```
+
 6.**Navigate to backend folder**
 ```bash
 cd backend
