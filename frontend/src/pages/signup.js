@@ -62,7 +62,7 @@ function Signup({ setIsAuthenticated }) {
 
   return (
     <div className="container">
-      <div className="overlay" style={{width:"35%",height:"60%"}}>
+      <div className="overlay" >
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="page" style={{fontSize:"50px"}}>Sign Up</h2>
 

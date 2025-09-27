@@ -4,7 +4,9 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    
+    background-image: url('../../public/background.jpg');
+    background-size: cover;
+    background-position: center;
 }
 .NewBlog{
   display:flex;
@@ -12,27 +14,33 @@
   width:15%;
 }
 .overlay{
-    border:3px solid #d0a236;
+    border:3px solid #080318;
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: rgba(74, 74, 74, 0.95); /* slight transparency */
     backdrop-filter: blur(6px);
-    padding: 50px 60px;
+    background-color: rgb(10, 50, 65);
     margin:10px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    color:#d0a236;
+    color:#c69012;
     animation: fadeIn 1s ease-in-out;
     transition: box-shadow 0.3s ease;
-    width:75%;
+    width:50%;
+    height:390px;
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(10, 50, 65, 0.5);
 
 }
-
+@media (max-width: 768px) {
+  .overlay {
+    width: 387.5px;
+  }
+}
 .login,.signup,.email,.password,.details{
-    color: #DAD3CB;
-  font-size: 20px;
+    color: #e7b10e;
+  font-size: 140%;
   margin-bottom: 30px
 }
 @keyframes fadeIn {
@@ -46,7 +54,7 @@
   }
 }
 .overlay:hover {
-  box-shadow: 0 15px 50px rgba(208, 162, 54, 0.6);
+  box-shadow: 0 15px 50px rgba(232, 4, 65, 0.6);
 }
 button{
     background: linear-gradient(135deg, #b87333, #d4af37);
@@ -65,4 +73,51 @@ button:hover {
   transform: scale(1.05);
   box-shadow: 0px 6px 18px rgba(212, 160, 23, 0.6);
   color:black
+}
+
+.overlay1 {
+  border:3px solid #080318;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(6px);
+    background-color: rgb(10, 50, 65);
+    margin:10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color:#c69012;
+    animation: fadeIn 1s ease-in-out;
+    transition: box-shadow 0.3s ease;
+    width:80%;
+    height:357px;
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(10, 50, 65, 0.5);
+    padding:30px;
+}
+.reaction:hover{
+  background-color: #c69012;
+  color:black
+}
+
+.Blog{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height:100%;
+  width:100%;
+}
+
+  .blog-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
+  padding:20px;
+  border: 2px solid #c69012 ;
+  border-radius: 15px;
+}
+label{
+  font-size: 1.5rem;
+  font-weight: 600;
 }

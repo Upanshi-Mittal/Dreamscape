@@ -95,7 +95,7 @@ function Final() {
     };
 
     return (
-        <div >
+        <div style={{ backgroundColor: '#041e28ff', minHeight: '100vh', color: 'white' }}>
             <div className="header">
             <h1>Welcome, {loggedInUser}</h1>
             
@@ -116,20 +116,19 @@ function Final() {
                 padding: "2rem"}}>
                 {Array.isArray(blogs) && blogs.length > 0 ? (
                     blogs.map((b) => (
-                        <div className="overlay" key={b._id}  >
+                        <div className="overlay1" key={b._id}  >
+                            <img src={b.pic}></img>
                             <h2>{b.title}</h2>
                             <p>{new Date(b.date).toLocaleDateString()}</p>
                             <p>{b.content}</p>
-
-
                             <p>Author: {b.name}</p>
                             <div className="additional">
                             
-                                <button onClick={() => handleLike(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                                <button className="reaction" onClick={() => handleLike(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
     <FaHeart style={{ color: 'crimsonred' }} />{b.likes}
 </button> 
-                            
-                                <button onClick={()=>handlecomments(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaComment style={{ color: 'white'}} />{b.comments.length}</button>
+
+                                <button className="reaction" onClick={() => handlecomments(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><FaComment style={{ color: 'white'}} />{b.comments.length}</button>
                             </div>
                         </div>
                     ))

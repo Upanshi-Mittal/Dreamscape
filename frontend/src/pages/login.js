@@ -58,8 +58,8 @@ function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <div className="container" style={{width:"35%",height:"60%"}}>
-      <div className="overlay">
+    <div className="container" >
+      <div className="overlay" >
         <form className="form" onSubmit={handleSubmit}>
           <h2 className="page" style={{ fontSize: "50px" }}> Login</h2>
 
@@ -87,7 +87,7 @@ function Login({ setIsAuthenticated }) {
             />
           </div>
 
-          <button type="submit" style={{ marginTop: "10px" }}>
+          <button type="submit" style={{ marginTop: "10px" }} className="login">
             Login
           </button>
 

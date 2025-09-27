@@ -19,7 +19,7 @@ function Blog() {
 
     const complete = async (e) => {
         e.preventDefault();
-        const {title, content } = blogData;
+        const {title, content,pic} = blogData;
 
         if (!title || !content) {
             return handleerror("All Fields are required ⚠️");
@@ -53,8 +53,9 @@ function Blog() {
     };
 
     return (
-        <div className="Blog">
-            <form onSubmit={complete}>
+        <div className="Blog" style={{ backgroundColor: '#041e28ff', minHeight: '100vh', color: 'white', padding: '2rem' ,display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>Enter Blog Details</h2>
+            <form className="blog-form" onSubmit={complete}>
                 <div className="title">
                     <label htmlFor="title">📝 Title</label>
                     <input
@@ -66,7 +67,7 @@ function Blog() {
                         placeholder="My First Love"
                     />
                 </div>
-                <div className="content">
+                <div className="content" style={{ marginTop: '1rem' , display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="content">📖 Content</label>
                     <textarea
                         id="content"
@@ -74,9 +75,14 @@ function Blog() {
                         value={blogData.content}
                         onChange={handleInput}
                         placeholder="lorem ipsum dolor sit..."
-                        rows={4}
+                        rows={8}
                         cols={50}
                     />
+                </div>
+                <div className="audio" style={{}}>
+                    <label htmlFor="pic">pic</label>
+                    <input type="file" className="pic"></input>
+
                 </div>
                 <button type="submit">✨ Submit</button>
             </form>
