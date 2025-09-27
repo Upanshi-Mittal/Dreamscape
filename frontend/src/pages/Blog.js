@@ -8,14 +8,15 @@ function Blog() {
         content: ""
     });
 
+    const [file, setFile] = useState(null);
     const handleInput = (e) => {
         const { name, value } = e.target;
         setBlogData((prev) => ({ ...prev, [name]: value }));
     };
 
-    useEffect(() => {
-        console.log("Blog data updated:", blogData);
-    }, [blogData]);
+    const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
     const complete = async (e) => {
         e.preventDefault();
@@ -25,16 +26,19 @@ function Blog() {
             return handleerror("All Fields are required ⚠️");
         }
 
+        const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    if (file) formData.append("pic", file); // attach file
         const url = "http://localhost:8080/products/add";
 
         try {
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
                     authorization: localStorage.getItem("token") // optional
                 },
-                body: JSON.stringify(blogData)
+                body:formData
             });
 
             const data = await response.json();
@@ -42,6 +46,7 @@ function Blog() {
             if (response.ok) {
                 handlesuccess("Blog Posted 🎉");
                 setBlogData({ title: "", content: "" });
+                setFile(null);
                 setTimeout(() => navigate("/final"), 1000);
             } else {
                 handleerror(data?.message || "Failed to post blog 😓");
@@ -79,9 +84,9 @@ function Blog() {
                         cols={50}
                     />
                 </div>
-                <div className="audio" style={{}}>
+                <div className="image" style={{}}>
                     <label htmlFor="pic">pic</label>
-                    <input type="file" className="pic"></input>
+                    <input type="file" className="pic" onChange={handleFileChange}></input>
 
                 </div>
                 <button type="submit">✨ Submit</button>

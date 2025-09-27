@@ -30,7 +30,7 @@ const blogSchema=new mongoose.Schema({
             date: { type: Date, default: Date.now }
         }
     ],
-    pic: { type: mongoose.Schema.Types.ObjectId, ref: 'Photo' }
+    pic: String
 })
 const usermodel=mongoose.model('user',userschema)
 const blogmodel=mongoose.model('blog',blogSchema)
