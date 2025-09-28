@@ -1,16 +1,15 @@
-# ✒️ InkHive
+# Dreamscape
 
-InkHive is a modern blogging platform where users can share their thoughts, stories, and ideas in a clean, elegant interface.  
+Dreamscape is a modern blogging platform where users can share their thoughts, stories, and ideas in a clean, elegant interface.  
 It supports **user authentication**, **likes**, and **comments**, making it a small but complete social blogging experience.
 
 ---
 
 ## 🚀 Features
-- **User Authentication** – Secure login and signup.
-- **Create & Manage Blogs** – Write and publish blogs easily.
+- **User Authentication** – Secure login and signup using JWT.
+- **Create & Manage Blogs** – Write and publish blogs easily and also can upload images using multer.
 - **Like System** – Appreciate posts with a ❤️.
 - **Comment Section** – Start discussions and share opinions.
-- **Responsive Design** – Works beautifully on desktop and mobile.
 - **Interactive UI** – Smooth animations and hover effects.
 
 ---
@@ -26,6 +25,7 @@ It supports **user authentication**, **likes**, and **comments**, making it a sm
 - Node.js
 - Express.js
 - MongoDB (Mongoose)
+- Cors
 
 **Other Tools:**
 - Toastify for notifications
@@ -38,11 +38,11 @@ It supports **user authentication**, **likes**, and **comments**, making it a sm
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Upanshi-Mittal/InkHive.git
+git clone https://github.com/Upanshi-Mittal/Dreamscape.git
 ```
 2. **Navigate to the repo**
 ```bash
-cd InkHive
+cd Dreamscape
 ```
 3. **Navigate to Frontend folder**
 ```bash
@@ -62,3 +62,7 @@ cd backend
 ```bash
 npm install
 ```
+---
+
+![Home Page](./assets/Screenshot%202025-09-29%20at%202.31.54 AM.png)
+![Blog Page](./assets/Screenshot 2025-09-29 at 2.32.37 AM.png)
