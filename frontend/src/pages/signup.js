@@ -62,7 +62,9 @@ function Signup({ setIsAuthenticated }) {
 
   return (
     <div className="container">
+      <div className="left"></div>
       <div className="overlay" >
+          <div className="inner-box">
       <form className="form" onSubmit={handleSubmit}>
         <h2 className="page" style={{fontSize:"50px"}}>Sign Up</h2>
 
@@ -110,6 +112,8 @@ function Signup({ setIsAuthenticated }) {
         </span>
       </form>
       </div>
+      </div>
+      <div className="right"></div>
       <ToastContainer />
     </div>
   );

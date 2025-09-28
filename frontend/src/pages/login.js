@@ -59,10 +59,11 @@ function Login({ setIsAuthenticated }) {
 
   return (
     <div className="container" >
+      <div className="left"></div>
       <div className="overlay" >
+          <div className="inner-box">
         <form className="form" onSubmit={handleSubmit}>
-          <h2 className="page" style={{ fontSize: "50px" }}> Login</h2>
-
+          <h2 className="page"> Login</h2>
           <div className="details">
             <label htmlFor="email">Email</label>
             <input
@@ -95,9 +96,10 @@ function Login({ setIsAuthenticated }) {
             Don’t have an account? <Link to="/signup" style={{colour:"#f3f1edff"}}>Sign up</Link>
           </span>
         </form>
-      
+      </div>
       <ToastContainer />
       </div>
+      <div className="right"></div>
     </div>
   );
 }

@@ -58,7 +58,7 @@ function Blog() {
     };
 
     return (
-        <div className="Blog" style={{ backgroundColor: '#041e28ff', minHeight: '100vh', color: 'white', padding: '2rem' ,display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' }}>
+        <div className="Blog">
             <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>Enter Blog Details</h2>
             <form className="blog-form" onSubmit={complete}>
                 <div className="title">
@@ -80,7 +80,7 @@ function Blog() {
                         value={blogData.content}
                         onChange={handleInput}
                         placeholder="lorem ipsum dolor sit..."
-                        rows={8}
+                        rows={2}
                         cols={50}
                     />
                 </div>

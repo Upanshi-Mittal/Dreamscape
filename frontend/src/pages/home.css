@@ -1,12 +1,26 @@
 .container{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     height: 100vh;
-    background-image: url('../../public/background.jpg');
     background-size: cover;
-    background-position: center;
+    background-position:right;
+    background-color: rgb(16, 16, 16);
+    display:flex;
+    justify-content:space-between;
+}
+.left{
+  background-image: url('../../public/bg2.jpg');
+  width: 32.5%;
+  height:100%;
+  background-size: 180%;
+  background-position-x:-12%;
+  background-position-y: 18%;
+}
+.right{
+  background-image: url('../../public/bg2.jpg');
+  width: 32.5%;
+  height:100%;
+  background-size:180%;
+  background-position-x:112%;
+  background-position-y: 18%;
 }
 .NewBlog{
   display:flex;
@@ -14,24 +28,38 @@
   width:15%;
 }
 .overlay{
-    border:3px solid #080318;
+    border:3px solid #393838;
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     backdrop-filter: blur(6px);
-    background-color: rgb(10, 50, 65);
-    margin:10px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    color:#c69012;
+    color:#eef2f4;
     animation: fadeIn 1s ease-in-out;
     transition: box-shadow 0.3s ease;
-    width:50%;
-    height:390px;
+    width:35%;
     -webkit-backdrop-filter: blur(10px);
-    background: rgba(10, 50, 65, 0.5);
-
+}
+.inner-box {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin:20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:100%;
+  width:90%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  justify-content: center;
+}
+h2{
+  text-align: center; 
+  font-size:40px;
+  color:#397697;
+  padding: 20px;
 }
 @media (max-width: 768px) {
   .overlay {
@@ -39,9 +67,8 @@
   }
 }
 .login,.signup,.email,.password,.details{
-    color: #e7b10e;
+    color: #fbfaf7;
   font-size: 140%;
-  margin-bottom: 30px
 }
 @keyframes fadeIn {
   from {
@@ -54,11 +81,11 @@
   }
 }
 .overlay:hover {
-  box-shadow: 0 15px 50px rgba(232, 4, 65, 0.6);
+  box-shadow: 0 15px 50px #397697;
 }
 button{
-    background: linear-gradient(135deg, #b87333, #d4af37);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background: #397697;
+    box-shadow: 0px 4px 10px rgba(134, 9, 9, 0.2);
     font-weight: bold;
     color: white;
     display: block;
@@ -69,9 +96,8 @@ button{
   border-radius: 25px;
 }
 button:hover {
-  background: linear-gradient(135deg, #d4af37, #b87333);
   transform: scale(1.05);
-  box-shadow: 0px 6px 18px rgba(212, 160, 23, 0.6);
+  box-shadow: 0px 6px 18px rgba(32, 176, 199, 0.6);
   color:black
 }
 
@@ -90,16 +116,21 @@ button:hover {
     animation: fadeIn 1s ease-in-out;
     transition: box-shadow 0.3s ease;
     width:80%;
-    height:357px;
     -webkit-backdrop-filter: blur(10px);
-    background: rgba(10, 50, 65, 0.5);
+    background: rgba(123, 125, 125, 0.5);
     padding:30px;
 }
 .reaction:hover{
-  background-color: #c69012;
-  color:black
+  color:#353737;
 }
 
+.reaction{
+  background:#397697; 
+  border:white;
+  cursor:pointer;
+  color: white;
+  height:55px;
+}
 .Blog{
   align-items: center;
   justify-content: center;
@@ -120,4 +151,13 @@ button:hover {
 label{
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+h1{
+  font-style:unset;
+  color:#397697;
+  font-size: 50px;
+}
+input{
+  color:#397697;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { handlesuccess,handleerror } from '../utils';
+import { handlesuccess, handleerror } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import { FaHeart, FaComment, FaUser } from 'react-icons/fa';
 import './page.css';
@@ -10,7 +10,7 @@ function Final() {
 
     const [loggedInUser, setLoggedInUser] = useState('');
     const [commentText, setCommentText] = useState({}); // store comment for each blog
-
+    const [showComments, setShowComments] = useState({});
     useEffect(() => {
         setLoggedInUser(localStorage.getItem('name'));
     }, []);
@@ -38,6 +38,7 @@ function Final() {
             console.error("Error fetching blog data:", error);
         }
     };
+    const [likedBlogs, setLikedBlogs] = useState([]);
     const handleLike = async (id) => {
         try {
             const response = await fetch(`http://localhost:8080/products/${id}/like`, {
@@ -48,6 +49,11 @@ function Final() {
                 },
             });
             const result = await response.json();
+            setLikedBlogs((prev) =>
+                prev.includes(id)
+                    ? prev.filter((blogId) => blogId !== id)  // unlike
+                    : [...prev, id]                             // like
+            );
 
             console.log("Liked blog:", result);
             fetchBlogs(); // Refresh blogs to update like count
@@ -86,6 +92,13 @@ function Final() {
             handleerror("Something went wrong!");
         }
     };
+    const toggleComments = (blogId) => {
+        setShowComments((prev) => ({
+            ...prev,
+            [blogId]: !prev[blogId],
+        }));
+    };
+
     useEffect(() => {
         fetchBlogs();
     }, []);
@@ -104,25 +117,24 @@ function Final() {
     const logoutButtonStyle = {
         marginTop: '20px',
         padding: '8px 16px',
-        backgroundColor: '#ffdddd',
+        backgroundColor: '#1275a3ff',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer'
     };
 
     const addButtonStyle = {
-        backgroundColor: 'rgba(157, 155, 155, 0.95)',
-        padding: '10px',
+        backgroundColor: 'rgba(21, 112, 172, 0.95)',
+        padding: '7px',
         borderRadius: '5px',
-        margin: '10px 0',
+        margin: '15px 0',
         display: 'inline-block'
     };
 
     return (
-        <div style={{ backgroundColor: '#041e28ff', minHeight: '100vh', color: 'white' }}>
+        <div classNmae="container">
             <div className="header">
-                <h1>Welcome, {loggedInUser}</h1>
-
+                <h3 style={{ color: "white" }}>Welcome,  {loggedInUser}</h3>
                 <div className="NewBlog">
                     <Link to="/Blog" style={addButtonStyle}>➕</Link>
                     <button onClick={clearAll} style={logoutButtonStyle}>
@@ -145,43 +157,48 @@ function Final() {
                         <div className="overlay1" key={b._id}  >
                             <img
                                 src={b.pic}
-                                style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px" }}
+                                style={{ width: "100%", height: "250px", objectFit: "cover", borderRadius: "8px" }}
                             />
                             <h2>{b.title}</h2>
                             <p>{new Date(b.date).toLocaleDateString()}</p>
                             <p>{b.content}</p>
-                            <p>Author: {b.name}</p>
+                            <p>Author: {b.username}</p>
                             <div className="additional">
 
-                                <button className="reaction" onClick={() => handleLike(b._id)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                                    <FaHeart style={{ color: 'crimsonred' }} />{b.likes}
+                                <button className="reaction" onClick={() => handleLike(b._id)} >
+                                    <FaHeart color={likedBlogs.includes(b._id) ? "red" : "grey"} />{b.likes}
                                 </button>
 
-                                <button className="reaction" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'white' }}>
+                                <button className="reaction" onClick={() => toggleComments(b._id)} >
                                     <FaComment /> {b.comments.length}
                                 </button>
-                                <div style={{ marginTop: '0.5rem' }}>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                        {b.comments.map((c, idx) => (
-                                            <div key={idx} style={{ backgroundColor: '#23344d', padding: '0.5rem', borderRadius: '5px', fontSize: '0.85rem' }}>
-                                                <strong>{c.username || "Guest"}:</strong> {c.text}
-                                            </div>
-                                        ))}
-                                    </div>
+                                {showComments[b._id] && (
+                                    <div style={{ marginTop: '0.5rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            {b.comments.map((c, idx) => (
+                                                <div key={idx} style={{ backgroundColor: '#23344d', padding: '0.5rem', borderRadius: '5px', fontSize: '0.85rem', color: "red" }}>
+                                                    <strong>{c.username || "Guest"}:</strong> {c.text}
+                                                </div>
+                                            ))}
+                                        </div>
 
-                                    <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-                                        <input
-                                            type="text"
-                                            placeholder="Write a comment..."
-                                            value={commentText[b._id] || ""}
-                                            onChange={(e) => handleCommentChange(b._id, e.target.value)}
-                                            style={{ flex: 1, padding: '0.4rem', borderRadius: '5px', border: 'none' }}
-                                        />
-                                        <button onClick={() => handleAddComment(b._id)} style={{ padding: '0.4rem 0.8rem', borderRadius: '5px', border: 'none', cursor: 'pointer', backgroundColor: '#4caf50', color: 'white' }}>
-                                            Add
-                                        </button>
+                                        <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Write a comment..."
+                                                value={commentText[b._id] || ""}
+                                                onChange={(e) => handleCommentChange(b._id, e.target.value)}
+                                                style={{ flex: 1, padding: '0.4rem', borderRadius: '5px', border: 'none' }}
+                                            />
+                                            <button
+                                                onClick={() => handleAddComment(b._id)}
+                                                style={{ padding: '0.4rem 0.8rem', borderRadius: '5px', border: 'none', cursor: 'pointer', backgroundColor: '#4caf50', color: 'white' }}
+                                            >
+                                                Add
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     ))

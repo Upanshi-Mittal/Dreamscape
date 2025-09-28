@@ -21,7 +21,8 @@ const comments = async (req, res) => {
     const newComment = {
       username,
       text: commentText,
-      date: new Date()
+      date: new Date(),
+      username:username.name
     };
 
     blog.comments.push(newComment);
