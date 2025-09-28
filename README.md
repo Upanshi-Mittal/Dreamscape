@@ -65,4 +65,3 @@ npm install
 ---
 
 ![Home Page](./assets/Screenshot%202025-09-29%20at%202.31.54 AM.png)
-![Blog Page](./assets/Screenshot 2025-09-29 at 2.32.37 AM.png)
