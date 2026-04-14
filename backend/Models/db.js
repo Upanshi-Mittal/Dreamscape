@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
 require('dotenv').config();
 
-const mongo_url = process.env.MONGO_CONN;
+const mongo_url =
+  process.env.NODE_ENV === "production"
+    ? process.env.MONGO_URI_PROD
+    : process.env.MONGO_URI_DEV;
 
 mongoose.connect(mongo_url, {
   useNewUrlParser: true,
@@ -20,5 +23,6 @@ conn.once("open", () => {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("photos");
 });
+const getGfs = () => gfs;
 
 module.exports = { mongoose, conn, gfs };

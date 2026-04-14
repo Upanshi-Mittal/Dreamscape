@@ -4,9 +4,8 @@ const { conn, gfs } = require("./Models/db");
 const cors = require('cors');
 const session = require('express-session');
 require('dotenv').config();
-console.log("MONGO_CONN from .env:", process.env.MONGO_CONN);
-const path = require('path');
 
+const path = require('path');
 const app = express();
 const Port = process.env.PORT || 8080;
 
