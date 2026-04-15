@@ -64,4 +64,26 @@ npm install
 ```
 ---
 
+## Docker Intiallization
+
+## 🐳 Docker Setup
+
+This project uses Docker to run frontend, backend, and database in isolated containers.
+
+1.**Run full project**
+```bash
+docker-compose up --build
+```
+
+2.**Restarting that docker container again**
+```bash
+docker-compose up
+```
+
+3.**Stop containers**
+```bash
+docker-compose down
+```
+---
+
 ![Home Page](./assets/Screenshot%202025-09-29%20at%202.31.54 AM.png)
