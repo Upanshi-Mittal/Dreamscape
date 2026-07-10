@@ -1,12 +1,11 @@
-import './App.css';
 import { Route, Routes, Navigate } from "react-router-dom";
-import Login from './pages/login';
-import Signup from './pages/signup';
-import Home from './pages/home';
-import Final from './pages/final';
-import RefereshHandler from './pages/refereshhandler';
+import Login from './components/login';
+import Signup from './components/signup';
+import Home from './components/home';
+import Final from './components/final';
+import RefereshHandler from './components/RefereshHandler';
 import { useState } from 'react';
-import Blog from './pages/Blog';
+import Blog from './components/Blog';
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" replace />;
@@ -17,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-
+      
       {/* Sets auth state on refresh if token exists */}
       <RefereshHandler setIsAuthenticated={setIsAuthenticated} />
 
