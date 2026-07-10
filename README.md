@@ -86,4 +86,4 @@ docker-compose down
 ```
 ---
 
-![Home Page](./assets/Screenshot%202025-09-29%20at%202.31.54 AM.png)
+
