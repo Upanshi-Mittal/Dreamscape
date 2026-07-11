@@ -19,7 +19,6 @@
 .overlay {
   position: relative;
   z-index: 1;
-  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,20 +34,11 @@
   display:flex;
   flex-direction: column;
   color:#0a0a0a;
-  padding-top: 120px ;
+  padding-top: 20px ;
   min-height: 500px;
 }
 
-/* buttons */
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: #f4f7f7;
-  font-size:1rem;
-  border-radius: 20px;
-  border:1px solid rgba(10, 10, 10, 0.6) ;
-}
+
 
 .inner-box h1 {
   font-size: 8rem;
@@ -75,4 +65,51 @@ font-family: 'Space Grotesk', sans-serif;}
 .nav{
     display:flex;
     gap:30px;
+}
+
+.landing {
+    min-height: 100vh;
+    background: #F7F3EC;
+
+    transition:
+        transform .8s cubic-bezier(.22,1,.36,1),
+        filter .8s ease;
+
+    transform: translateX(0);
+}
+
+.landing-open {
+    filter: brightness(.96);
+    width: 60%
+    
+}
+
+.signup-panel {
+
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: 40vw;
+    height: 100vh;
+
+    background: #F7F3EC;
+
+    transform: translateX(100%);
+
+    transition: transform .8s cubic-bezier(.22,1,.36,1);
+
+    z-index: 100;
+}
+
+.signup-panel.open {
+    transform: translateX(0);
+}
+
+.app{
+    display:flex;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
 }

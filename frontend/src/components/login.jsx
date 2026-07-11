@@ -58,14 +58,15 @@ function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <div className="container" >
-      <div className="left"></div>
-      <div className="overlay" >
-          <div className="inner-box">
-        <form className="form" onSubmit={handleSubmit}>
-          <h2 className="page"> Login</h2>
+    <div className="flex  h-full justify-center items-center" >
+      
+        <form className="form flex flex-col justify-center h-full" onSubmit={handleSubmit}>
+          <div className="uppercase">welcome back</div>
+          <h2 className="page"> Pick up where you left off</h2>
           <div className="details">
-            <label htmlFor="email">Email</label>
+            <div>
+              <label htmlFor="email">Email</label>
+            </div>
             <input
               type="email"
               id="email"
@@ -74,10 +75,13 @@ function Login({ setIsAuthenticated }) {
               value={loginfo.email}
               onChange={handleInputChange}
             />
+            <hr />
           </div>
 
           <div className="details">
-            <label className="password" htmlFor="password">Password</label>
+            <div>
+              <label className="password" htmlFor="password">Password</label>
+            </div>
             <input
               type="password"
               id="password"
@@ -86,6 +90,7 @@ function Login({ setIsAuthenticated }) {
               value={loginfo.password}
               onChange={handleInputChange}
             />
+            <hr />
           </div>
 
           <button type="submit" style={{ marginTop: "10px" }} className="login">
@@ -93,13 +98,12 @@ function Login({ setIsAuthenticated }) {
           </button>
 
           <span style={{ fontsize: "15px", display: "block", marginTop: "12px" }}>
-            Don’t have an account? <Link to="/signup" style={{colour:"#f3f1edff"}}>Sign up</Link>
+            New here? Start your first page <Link to="/signup" style={{ colour: "#f3f1edff" }}>Sign up</Link>
           </span>
         </form>
-      </div>
+      <div className="w-[55%] bg-red-500"></div>
       <ToastContainer />
-      </div>
-      <div className="right"></div>
+
     </div>
   );
 }

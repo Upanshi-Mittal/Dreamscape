@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from './components/login';
-import Signup from './components/signup';
+//import Signup from './components/signup';
 import Home from './components/home';
 import Final from './components/final';
 import RefereshHandler from './components/RefereshHandler';
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} />} />
+       {/*} <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} />} />*/}
         <Route path="/Blog" element={<Blog />}/>
         <Route
           path="/final"
