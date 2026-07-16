@@ -21,8 +21,8 @@ function App() {
       <RefereshHandler setIsAuthenticated={setIsAuthenticated} />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/" element={<Home setIsAuthenticated={setIsAuthenticated} />} />
+       {/* <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} */}
        {/*} <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} />} />*/}
         <Route path="/Blog" element={<Blog />}/>
         <Route

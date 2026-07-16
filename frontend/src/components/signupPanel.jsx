@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./home.css";
 import { handleerror, handlesuccess } from "../utils";
 
-
 function SignupPanel({ isOpen, onClose, setIsAuthenticated, showLogin, onLoginClick }) {
   const navigate = useNavigate();
   const [signinfo, setsigninfo] = useState({
@@ -88,21 +87,18 @@ function SignupPanel({ isOpen, onClose, setIsAuthenticated, showLogin, onLoginCl
           ×
         </button>
 
-          <form className="form flex flex-col justify-center h-full" onSubmit={handleSubmit}>
+          <form className="form flex flex-col justify-center h-full" style={{margin:"20px"}} onSubmit={handleSubmit}>
 
 
           <p className="uppercase tracking-[6px] text-[#B8AEE8] text-sm mb-6">
             BEGIN YOUR FIRST PAGE
           </p>
 
-
-
-
-          <h1 className="font-serif text-[42px] leading-[1.05] mb-16">
+          <h1 className="font-serif text-[42px] leading-[1.05] " style={{marginBottom:"16px"}}>
             Create your account
           </h1>
 
-          <div style={{ marginBottom: "12px" }}>
+          <div style={{ margin: "0 12px 12px 12px" }}>
 
             <label htmlFor="name" className="block text-xl text-neutral-600 mb-3">Name</label>
 
@@ -124,7 +120,7 @@ function SignupPanel({ isOpen, onClose, setIsAuthenticated, showLogin, onLoginCl
             <div className="h-px bg-neutral-400 mt-4" />
           </div>
 
-          <div style={{ marginBottom: "12px" }}>
+          <div style={{ margin: "0 12px 12px 12px" }}>
             <label htmlFor="email" className="block text-xl text-neutral-600 mb-3">Email</label>
 
             <input
@@ -144,7 +140,7 @@ function SignupPanel({ isOpen, onClose, setIsAuthenticated, showLogin, onLoginCl
             <div className="h-px bg-neutral-400 mt-4" />
           </div>
 
-          <div style={{ marginBottom: "12px", marginRight: "5px" }}>
+          <div style={{ margin: "0 12px 12px 12px" }}>
 
             <label htmlFor="password" className="block text-xl text-neutral-600 mb-3">Password</label>
 

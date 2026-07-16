@@ -6,7 +6,7 @@ import Header from './header';
 import HeroPlane from "./Heroplane/heroplane";
 import SignupPanel from './signupPanel'
 import LoginPanel from './loginPanel'
-function Home() {
+function Home({setIsAuthenticated}) {
     const [showSignup, setShowSignup] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
@@ -75,9 +75,12 @@ function Home() {
                 onClose={() => setShowSignup(false)}
                 showLogin={showLogin}
                 onLoginClick={() => setShowLogin(true)}
+                setIsAuthenticated={setIsAuthenticated}
 
             />
-            <LoginPanel isOpen={showLogin} onClose={() => setShowLogin(false)} onSignupClick={() => setShowSignup(true)}/>
+            <LoginPanel isOpen={showLogin} onClose={() => setShowLogin(false)} onSignupClick={() => setShowSignup(true)}
+                    setIsAuthenticated={setIsAuthenticated}
+/>
 
             <ToastContainer />
         </>

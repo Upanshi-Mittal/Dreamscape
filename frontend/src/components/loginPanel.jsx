@@ -85,10 +85,12 @@ function LoginPanel({ isOpen, onClose, setIsAuthenticated , onSignupClick}) {
           ×
         </button>
 
-        <form className="form flex flex-col justify-center h-full" onSubmit={handleSubmit}>
+        <form className="form flex flex-col justify-center h-full" style={{margin:"20px"}} onSubmit={handleSubmit}>
           <div className="uppercase tracking-[6px] text-[#B8AEE8] text-sm mb-6">Welcome back</div>
           <div className="font-serif text-[42px] leading-[1.05] mb-16" style={{marginBottom:"16px"}}>Pick up where you left off</div>
-          <div style={{ marginBottom: "12px" }}>
+
+          <div style={{ margin: "0 12px 12px 12px" }}>
+
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -107,7 +109,7 @@ function LoginPanel({ isOpen, onClose, setIsAuthenticated , onSignupClick}) {
             <div className="h-px bg-neutral-400 mt-4" />
           </div>
 
-          <div style={{ marginBottom: "12px" }}>
+          <div style={{ margin: "0 12px 12px 12px" }}>
               <label className="password" htmlFor="password" className="block text-xl text-neutral-600 mb-3">Password</label>
             <input
               type="password"
@@ -145,7 +147,8 @@ duration-500"
             New here? Start your first page 
             <button  className="text-black font-medium ml-2 hover:underline" onClick={() => {
   onClose();
-  onSignupClick();}}>Sign up</button>
+  onSignupClick();
+  handleSubmit();}}>Sign up</button>
           </p>
         </form>
         <ToastContainer />
