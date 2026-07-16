@@ -83,7 +83,12 @@ font-family: 'Space Grotesk', sans-serif;}
     width: 60%
     
 }
-
+.login-open{
+  filter: brightness(.96);
+    width: 60%;
+    transform: translateX(70%);
+  
+}
 .signup-panel {
 
     position: fixed;
