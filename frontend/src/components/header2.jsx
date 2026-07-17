@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 
-function Header2() {
+function Header2({toOpen,setOpenprofile}) {
     return (
         < div className="flex justify-between items-center" style={{ margin: "30px" }}>
             <h3 >Paperplane</h3>
@@ -11,7 +11,7 @@ function Header2() {
                 <li>code</li>
             </ul>
             
-            <div className="bg-yellow-500 w-10 h-10 rounded-full">
+            <div className="bg-yellow-500 w-10 h-10 rounded-full" onClick={setOpenprofile}>
             </div>
 
         </div >

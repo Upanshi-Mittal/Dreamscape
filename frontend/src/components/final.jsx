@@ -19,6 +19,7 @@ function Final() {
   const [commentText, setCommentText] = useState({});
   const [showComments, setShowComments] = useState({});
   const [likedBlogs, setLikedBlogs] = useState([]);
+  const [openProfile,setOpenProfile] = useState(false)
 
   useEffect(() => {
     setLoggedInUser(localStorage.getItem('name'));
@@ -107,7 +108,7 @@ function Final() {
   return (
     <div className="min-h-screen bg-[#FAF6EF]">
       <FontImport />
-      <Header2 />
+      <Header2 toOpen={openProfile} setOpenprofile={()=>setOpenProfile(true)}/>
 
       <div className="mx-auto" style={{ maxWidth: 1100, padding: '34px 44px 80px' }}>
         {Array.isArray(blogs) && blogs.length > 0 ? (
