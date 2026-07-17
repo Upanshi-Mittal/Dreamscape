@@ -1,216 +1,242 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { handlesuccess, handleerror } from '../utils';
 import { ToastContainer } from 'react-toastify';
-import { FaHeart, FaComment, FaUser } from 'react-icons/fa';
-import './page.css';
+import { FaHeart, FaRegHeart, FaRegComment } from 'react-icons/fa';
+import Header2 from './header2';
+
+// Move into global CSS - see note on Blog.jsx / Header.jsx
+const FontImport = () => (
+  <style>
+    {`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');`}
+  </style>
+);
+
 function Final() {
-    const navigate = useNavigate();
-    const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState('');
+  const [commentText, setCommentText] = useState({});
+  const [showComments, setShowComments] = useState({});
+  const [likedBlogs, setLikedBlogs] = useState([]);
 
-    const [loggedInUser, setLoggedInUser] = useState('');
-    const [commentText, setCommentText] = useState({}); // store comment for each blog
-    const [showComments, setShowComments] = useState({});
-    useEffect(() => {
-        setLoggedInUser(localStorage.getItem('name'));
-    }, []);
+  useEffect(() => {
+    setLoggedInUser(localStorage.getItem('name'));
+  }, []);
 
-    const clearAll = () => {
-        handlesuccess('You have logged out successfully');
-        localStorage.clear();
+  const clearAll = () => {
+    handlesuccess('You have logged out successfully');
+    localStorage.clear();
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
+  };
 
-        setTimeout(() => {
-            navigate('/');
-        }, 1000);
-    };
+  const fetchBlogs = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/products/blog', {
+        headers: {
+          authorization: localStorage.getItem('token'),
+        },
+      });
+      const data = await response.json();
+      setBlogs(data.blogs);
+    } catch (error) {
+      console.error('Error fetching blog data:', error);
+    }
+  };
 
-    const fetchBlogs = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/products/blog', {
-                headers: {
-                    authorization: localStorage.getItem('token'),
-                },
-            });
-            const data = await response.json();
-            console.log("Fetched Blogs:", data);
-            setBlogs(data.blogs);
-        } catch (error) {
-            console.error("Error fetching blog data:", error);
-        }
-    };
-    const [likedBlogs, setLikedBlogs] = useState([]);
-    const handleLike = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/products/${id}/like`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: localStorage.getItem("token"),
-                },
-            });
-            const result = await response.json();
-            setLikedBlogs((prev) =>
-                prev.includes(id)
-                    ? prev.filter((blogId) => blogId !== id)  // unlike
-                    : [...prev, id]                             // like
-            );
+  const handleLike = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/products/${id}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: localStorage.getItem('token'),
+        },
+      });
+      const result = await response.json();
+      setLikedBlogs((prev) =>
+        prev.includes(id) ? prev.filter((blogId) => blogId !== id) : [...prev, id]
+      );
+      fetchBlogs();
+    } catch (error) {
+      console.error('Error liking blog:', error);
+    }
+  };
 
-            console.log("Liked blog:", result);
-            fetchBlogs(); // Refresh blogs to update like count
+  const handleCommentChange = (blogId, text) => {
+    setCommentText((prev) => ({ ...prev, [blogId]: text }));
+  };
 
-        } catch (error) {
-            console.error("Error liking blog:", error);
-        }
-    };
-    const handleCommentChange = (blogId, text) => {
-        setCommentText((prev) => ({ ...prev, [blogId]: text }));
-    };
+  const handleAddComment = async (blogId) => {
+    const text = commentText[blogId];
+    if (!text) return handleerror('Comment cannot be empty!');
 
-    const handleAddComment = async (blogId) => {
-        const text = commentText[blogId];
-        if (!text) return handleerror("Comment cannot be empty!");
-
-        try {
-            const response = await fetch(`http://localhost:8080/products/${blogId}/comments`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: localStorage.getItem("token"),
-                },
-                body: JSON.stringify({ text }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                handlesuccess("Comment added!");
-                setCommentText((prev) => ({ ...prev, [blogId]: "" }));
-                fetchBlogs();
-            } else {
-                handleerror(data.message || "Failed to add comment");
-            }
-        } catch (error) {
-            console.error("Error adding comment:", error);
-            handleerror("Something went wrong!");
-        }
-    };
-    const toggleComments = (blogId) => {
-        setShowComments((prev) => ({
-            ...prev,
-            [blogId]: !prev[blogId],
-        }));
-    };
-
-    useEffect(() => {
+    try {
+      const response = await fetch(`http://localhost:8080/products/${blogId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({ text }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        handlesuccess('Comment added!');
+        setCommentText((prev) => ({ ...prev, [blogId]: '' }));
         fetchBlogs();
-    }, []);
+      } else {
+        handleerror(data.message || 'Failed to add comment');
+      }
+    } catch (error) {
+      console.error('Error adding comment:', error);
+      handleerror('Something went wrong!');
+    }
+  };
 
-    const blogCardStyle = {
-        border: '1px solid #ccc',
-        padding: '20px',
-        marginBottom: '10px',
-        borderRadius: '8px',
-        backgroundColor: '#f9f9f9',
-        height: '300px',
-        width: '400px',
-        boxshadow: '10px 3px 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)'
-    };
+  const toggleComments = (blogId) => {
+    setShowComments((prev) => ({ ...prev, [blogId]: !prev[blogId] }));
+  };
 
-    const logoutButtonStyle = {
-        marginTop: '20px',
-        padding: '8px 16px',
-        backgroundColor: '#1275a3ff',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer'
-    };
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
 
-    const addButtonStyle = {
-        backgroundColor: 'rgba(21, 112, 172, 0.95)',
-        padding: '7px',
-        borderRadius: '5px',
-        margin: '15px 0',
-        display: 'inline-block'
-    };
+  return (
+    <div className="min-h-screen bg-[#FAF6EF]">
+      <FontImport />
+      <Header2 />
 
-    return (
-        <div classNmae="container">
-            <div className="header">
-                <h3 style={{ color: "white" }}>Welcome,  {loggedInUser}</h3>
-                <div className="NewBlog">
-                    <Link to="/Blog" style={addButtonStyle}>➕</Link>
-                    <button onClick={clearAll} style={logoutButtonStyle}>
-                        Logout
-                    </button>
-                </div>
-
-            </div>
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "100vh",
-                gap: "1rem",
-                padding: "2rem"
-            }}>
-                {Array.isArray(blogs) && blogs.length > 0 ? (
-                    blogs.map((b) => (
-                        <div className="overlay1" key={b._id}  >
-                            <img
-                                src={b.pic}
-                                style={{ width: "100%", height: "250px", objectFit: "cover", borderRadius: "8px" }}
-                            />
-                            <h2>{b.title}</h2>
-                            <p>{new Date(b.date).toLocaleDateString()}</p>
-                            <p>{b.content}</p>
-                            <p>Author: {b.username}</p>
-                            <div className="additional">
-
-                                <button className="reaction" onClick={() => handleLike(b._id)} >
-                                    <FaHeart color={likedBlogs.includes(b._id) ? "red" : "grey"} />{b.likes}
-                                </button>
-
-                                <button className="reaction" onClick={() => toggleComments(b._id)} >
-                                    <FaComment /> {b.comments.length}
-                                </button>
-                                {showComments[b._id] && (
-                                    <div style={{ marginTop: '0.5rem' }}>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                            {b.comments.map((c, idx) => (
-                                                <div key={idx} style={{ backgroundColor: '#23344d', padding: '0.5rem', borderRadius: '5px', fontSize: '0.85rem', color: "red" }}>
-                                                    <strong>{c.username || "Guest"}:</strong> {c.text}
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-                                            <input
-                                                type="text"
-                                                placeholder="Write a comment..."
-                                                value={commentText[b._id] || ""}
-                                                onChange={(e) => handleCommentChange(b._id, e.target.value)}
-                                                style={{ flex: 1, padding: '0.4rem', borderRadius: '5px', border: 'none' }}
-                                            />
-                                            <button
-                                                onClick={() => handleAddComment(b._id)}
-                                                style={{ padding: '0.4rem 0.8rem', borderRadius: '5px', border: 'none', cursor: 'pointer', backgroundColor: '#4caf50', color: 'white' }}
-                                            >
-                                                Add
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p>No blogs available.</p>
+      <div className="mx-auto" style={{ maxWidth: 1100, padding: '34px 44px 80px' }}>
+        {Array.isArray(blogs) && blogs.length > 0 ? (
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            style={{ gap: 18 }}
+          >
+            {blogs.map((b) => (
+              <div
+                key={b._id}
+                className="bg-white rounded-[10px] overflow-hidden border border-[#E4DED0]"
+              >
+                {b.pic && (
+                  <img
+                    src={b.pic}
+                    alt={b.title}
+                    style={{ width: '100%', height: 150, objectFit: 'cover' }}
+                  />
                 )}
-            </div>
 
+                <div style={{ padding: 18 }}>
+                  <div
+                    className="text-[#8B8577]"
+                    style={{ fontSize: 11, marginBottom: 6 }}
+                  >
+                    {b.username || 'Anonymous'} &middot;{' '}
+                    {b.date ? new Date(b.date).toLocaleDateString() : ''}
+                  </div>
 
-            <ToastContainer />
-        </div>
-    );
+                  <h2
+                    className="text-[#1C1B19]"
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 18,
+                      lineHeight: 1.35,
+                      marginBottom: 6,
+                    }}
+                  >
+                    {b.title}
+                  </h2>
+
+                  <p
+                    className="text-[#6E6A61]"
+                    style={{
+                      fontSize: 13,
+                      lineHeight: 1.6,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {b.content}
+                  </p>
+
+                  <div
+                    className="flex items-center border-t border-[#E8E0D0]"
+                    style={{ marginTop: 14, paddingTop: 12, gap: 18 }}
+                  >
+                    <button
+                      className="flex items-center text-[#8B8577] hover:text-[#1C1B19] transition-colors"
+                      style={{ gap: 6, fontSize: 12 }}
+                      onClick={() => handleLike(b._id)}
+                    >
+                      {likedBlogs.includes(b._id) ? (
+                        <FaHeart size={12} color="#C9BFE0" />
+                      ) : (
+                        <FaRegHeart size={12} />
+                      )}
+                      {b.likes}
+                    </button>
+
+                    <button
+                      className="flex items-center text-[#8B8577] hover:text-[#1C1B19] transition-colors"
+                      style={{ gap: 6, fontSize: 12 }}
+                      onClick={() => toggleComments(b._id)}
+                    >
+                      <FaRegComment size={12} />
+                      {b.comments.length}
+                    </button>
+                  </div>
+
+                  {showComments[b._id] && (
+                    <div style={{ marginTop: 14 }}>
+                      <div className="flex flex-col" style={{ gap: 8 }}>
+                        {b.comments.map((c, idx) => (
+                          <div
+                            key={idx}
+                            className="bg-[#F3EEE2] text-[#2C2B28]"
+                            style={{ padding: '8px 10px', borderRadius: 6, fontSize: 12 }}
+                          >
+                            <strong>{c.username || 'Guest'}:</strong> {c.text}
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex" style={{ marginTop: 10, gap: 8 }}>
+                        <input
+                          type="text"
+                          placeholder="Write a comment..."
+                          value={commentText[b._id] || ''}
+                          onChange={(e) => handleCommentChange(b._id, e.target.value)}
+                          className="flex-1 bg-transparent border-b border-[#D9D0BC] outline-none text-[#1C1B19] placeholder-[#B0AA9B]"
+                          style={{ fontSize: 12, paddingBottom: 6 }}
+                        />
+                        <button
+                          onClick={() => handleAddComment(b._id)}
+                          className="text-[#1C1B19] border border-[#1C1B19] rounded-full hover:bg-[#1C1B19] hover:text-[#FAF6EF] transition-colors"
+                          style={{ fontSize: 11, padding: '6px 14px' }}
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-[#8B8577]" style={{ fontSize: 13 }}>
+            No stories yet.
+          </p>
+        )}
+      </div>
+
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default Final;
