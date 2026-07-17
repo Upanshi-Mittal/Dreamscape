@@ -1,89 +1,108 @@
-# Dreamscape
+# Paperplane
 
-Dreamscape is a modern blogging platform where users can share their thoughts, stories, and ideas in a clean, elegant interface.  
-It supports **user authentication**, **likes**, and **comments**, making it a small but complete social blogging experience.
+> Fold your thoughts. Let them travel.
 
----
+Paperplane is an editorial-inspired blogging platform built for thoughtful writing and meaningful reading. Rather than treating articles as content to consume, Paperplane treats every post as something carefully crafted—a page folded into a paper plane and sent into the world.
 
-## 🚀 Features
-- **User Authentication** – Secure login and signup using JWT.
-- **Create & Manage Blogs** – Write and publish blogs easily and also can upload images using multer.
-- **Like System** – Appreciate posts with a ❤️.
-- **Comment Section** – Start discussions and share opinions.
-- **Interactive UI** – Smooth animations and hover effects.
+The project combines a calm reading experience with modern web technologies, subtle motion, and an interface designed to stay out of the writer's way.
 
 ---
 
-## 🛠️ Tech Stack
-**Frontend:**
-- React.js
+## Features
+
+- Secure authentication with JWT
+- Create, edit and publish articles
+- Image uploads with Multer
+- Like and comment on posts
+- Responsive editorial interface
+- Interactive Three.js paper plane
+- Smooth page transitions and micro-interactions
+
+---
+
+## Technology
+
+### Frontend
+
+- React
 - React Router
-- React Icons
-- CSS3
+- Tailwind CSS
+- Three.js
+- React Three Fiber
+- React Toastify
 
-**Backend:**
+### Backend
+
 - Node.js
 - Express.js
-- MongoDB (Mongoose)
-- Cors
-
-**Other Tools:**
-- Toastify for notifications
-- JWT for authentication
-- Fetch API for backend communication
+- MongoDB
+- Mongoose
+- JWT Authentication
+- Multer
 
 ---
 
-## 📦 Installation & Setup
+## Running the project
 
-1. **Clone the repository**
+Clone the repository.
+
 ```bash
 git clone https://github.com/Upanshi-Mittal/Dreamscape.git
-```
-2. **Navigate to the repo**
-```bash
 cd Dreamscape
 ```
-3. **Navigate to Frontend folder**
+
+Install the frontend.
+
 ```bash
 cd frontend
-```
-4. **Install package**
-```bash
 npm install
+npm run dev
 ```
-5.**Open an another terminal**
 
-6.**Navigate to backend folder**
+Open another terminal and install the backend.
+
 ```bash
 cd backend
-```
-7. **Install package**
-```bash
 npm install
+npm run dev
 ```
+
 ---
 
-## Docker Intiallization
+## Docker
 
-## 🐳 Docker Setup
+Build and start the application.
 
-This project uses Docker to run frontend, backend, and database in isolated containers.
-
-1.**Run full project**
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
-2.**Restarting that docker container again**
+Start existing containers.
+
 ```bash
-docker-compose up
+docker compose up
 ```
 
-3.**Stop containers**
+Stop the application.
+
 ```bash
-docker-compose down
+docker compose down
 ```
+
 ---
 
+## Project Status
 
+Paperplane is currently under active development.
+
+The current focus is on building a writing experience that feels calm, intentional, and beautifully crafted. Upcoming work includes a rich text editor, drafts, bookmarks, user profiles, improved discovery, and a refined reading experience.
+
+---
+
+## Philosophy
+
+Writing deserves more than another social feed.
+
+Paperplane is an attempt to create a slower space on the web—one where ideas are written deliberately, shared thoughtfully, and discovered naturally.
+
+Every paper plane begins as a blank page.
