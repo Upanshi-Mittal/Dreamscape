@@ -47,8 +47,8 @@ The project combines a calm reading experience with modern web technologies, sub
 Clone the repository.
 
 ```bash
-git clone https://github.com/Upanshi-Mittal/Dreamscape.git
-cd Dreamscape
+git clone https://github.com/Upanshi-Mittal/Paperplane.git
+cd Paperplane
 ```
 
 Install the frontend.
@@ -99,10 +99,3 @@ The current focus is on building a writing experience that feels calm, intention
 
 ---
 
-## Philosophy
-
-Writing deserves more than another social feed.
-
-Paperplane is an attempt to create a slower space on the web—one where ideas are written deliberately, shared thoughtfully, and discovered naturally.
-
-Every paper plane begins as a blank page.
