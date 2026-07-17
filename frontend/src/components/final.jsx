@@ -4,7 +4,7 @@ import { handlesuccess, handleerror } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import { FaHeart, FaRegHeart, FaRegComment } from 'react-icons/fa';
 import Header2 from './header2';
-
+import {Link} from "react-router-dom"
 // Move into global CSS - see note on Blog.jsx / Header.jsx
 const FontImport = () => (
   <style>
@@ -233,6 +233,11 @@ function Final() {
           </p>
         )}
       </div>
+      <Link
+  to="/Blog"
+  className="fixed bottom-18 right-8 bg-yellow-500 h-10 w-10 rounded-full flex items-center justify-center"
+>+
+</Link>
 
       <ToastContainer />
     </div>

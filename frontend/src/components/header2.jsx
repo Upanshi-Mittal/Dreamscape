@@ -10,7 +10,7 @@ function Header2() {
                 <li>Poetry</li>
                 <li>code</li>
             </ul>
-            <Link to="/Blog">+</Link>
+            
             <div className="bg-yellow-500 w-10 h-10 rounded-full">
             </div>
 
